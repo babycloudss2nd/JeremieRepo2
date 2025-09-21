@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import './signup.css';
 import camsImage from './assets/pic.jpg';
 
-// ✅ Use Vite env variable with fallback
 const API_BASE_URL =
   import.meta.env.VITE_API_URL || "http://54.174.227.60:5000";
 const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
