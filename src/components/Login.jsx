@@ -1,16 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
-import camsImage from './assets/pic.jpg';
+import loginBack from './assets/loginback.jpg';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://54.174.227.60:5000";
-const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
-
-function Signup({ onSuccess }) {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+function Login({ onSuccess }) {
+  const [form, setForm] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
@@ -21,25 +17,27 @@ function Signup({ onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
-      setMessage(res.data.message);
+      const API_BASE_URL = process.env.VITE_SERVER_IP || "https://54.174.227.60:5000";
+      const res = await axios.post(`${API_BASE_URL}/api/login`, form);
+      setMessage(res.data.message || 'Login successful');
+
+      const user = res.data.user || { email: form.email };
+      localStorage.setItem("user", JSON.stringify(user));
+
       if (onSuccess) onSuccess();
-      navigate('/login');
+      navigate('/home');
     } catch (err) {
-      setMessage(
-        'Signup failed, try again: ' +
-          (err.response?.data?.message || err.message)
-      );
+      setMessage(err.response?.data?.message || err.message);
     }
   };
 
   const backgroundStyle = {
-    width: '100vw',
-    height: '100vh',
-    backgroundImage: `url(${camsImage})`,
+    backgroundImage: `url(${loginBack})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
+    width: '100vw',
+    height: '100vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -49,11 +47,7 @@ function Signup({ onSuccess }) {
     <div style={backgroundStyle}>
       <div className="page-wrapper">
         <div className="signup-container">
-          <div className="icon-top">
-            Be part of the <strong>Black Shield</strong> family today!
-          </div>
-
-          <div className="signup-image">
+          <div className="signup-image" style={{ marginBottom: '20px' }}>
             <img
               src="/ChatGPT%20Image%20Aug%202,%202025,%2006_25_44%20PM.png"
               alt="Signup logo"
@@ -61,16 +55,8 @@ function Signup({ onSuccess }) {
             />
           </div>
 
+          <h2 className="login-heading">Login</h2>
           <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <FaUser className="icon" />
-              <input
-                name="name"
-                placeholder="Full Name"
-                onChange={handleChange}
-                required
-              />
-            </div>
             <div className="input-group">
               <FaEnvelope className="icon" />
               <input
@@ -91,15 +77,12 @@ function Signup({ onSuccess }) {
                 required
               />
             </div>
-            <div className="password-hint">
-              Use 8+ characters with letters & numbers
-            </div>
-            <button type="submit">Create Account</button>
+            <button type="submit">Log In</button>
             {message && <p className="message">{message}</p>}
           </form>
 
-          <button className="login-redirect" onClick={() => navigate('/login')}>
-            Already have an account? Log in
+          <button className="login-redirect" onClick={() => navigate('/')}>
+            Don't have an account? Sign up
           </button>
         </div>
       </div>
@@ -107,4 +90,4 @@ function Signup({ onSuccess }) {
   );
 }
 
-export default Signup;
+export default Login;

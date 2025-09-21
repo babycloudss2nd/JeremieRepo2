@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Signup from './Signup.jsx';
-import Login from './Login.jsx';
-import Home from './Home.jsx';
-import Products from './Products.jsx';
-import BookingAppointments from './BookingAppointments.jsx';
-import Cart from './Cart.jsx';
-import Checkout from './Checkout.jsx';
-import Delivery from './Delivery.jsx';
-import Navigation from './Navigation.jsx';
+import Signup from './components/Signup.jsx';
+import Login from './components/Login.jsx';
+import Home from './components/Home.jsx';
+import Products from './components/Products.jsx';
+import BookingAppointments from './components/BookingAppointments.jsx';
+import Cart from './components/Cart.jsx';
+import Checkout from './components/Checkout.jsx';
+import Delivery from './components/Delivery.jsx';
+import Navigation from './components/Navigation.jsx';
 
 function ProtectedRouteWrapper({ isAuth, children }) {
   if (!isAuth) {
