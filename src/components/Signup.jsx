@@ -7,7 +7,6 @@ import camsImage from '../assets/cams.webp';
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL || "https://54.174.227.60:5000";
-const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
 
 function Signup({ onSuccess }) {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
