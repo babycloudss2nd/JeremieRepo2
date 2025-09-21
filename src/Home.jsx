@@ -14,7 +14,6 @@ function Home() {
   const [userName, setUserName] = useState("");
   const [showWelcome, setShowWelcome] = useState(true);
 
-  // Slide rotation every 10 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
