@@ -9,6 +9,15 @@ function Login({ onSuccess }) {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+  // ✅ Define backgroundStyle here
+  const backgroundStyle = {
+    backgroundColor: "#f5f5f5", // change to your preferred color
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
