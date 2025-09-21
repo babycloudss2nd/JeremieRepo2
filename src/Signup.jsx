@@ -2,8 +2,13 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import './signup.css'
+import './signup.css';
 import camsImage from './assets/pic.jpg';
+
+// ✅ Use Vite env variable with fallback
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://54.174.227.60:5000";
+const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
 
 function Signup({ onSuccess }) {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -17,13 +22,15 @@ function Signup({ onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const API_BASE_URL = process.env.VITE_SERVER_IP || 'localhost';
-      const res = await axios.post(`http://${API_BASE_URL}:5000/api/signup`, form);
+      const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
       setMessage(res.data.message);
       if (onSuccess) onSuccess();
       navigate('/login');
     } catch (err) {
-      setMessage('Signup failed, try again: ' + (err.response?.data?.message || err.message));
+      setMessage(
+        'Signup failed, try again: ' +
+          (err.response?.data?.message || err.message)
+      );
     }
   };
 

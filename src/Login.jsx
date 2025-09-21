@@ -17,8 +17,8 @@ function Login({ onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const API_BASE_URL = process.env.VITE_SERVER_IP || 'localhost';
-      const res = await axios.post(`http://${API_BASE_URL}:5000/api/login`, form);
+      const API_BASE_URL = process.env.VITE_SERVER_IP || "http://54.174.227.60:5000";
+      const res = await axios.post(`${API_BASE_URL}/api/login`, form);
       setMessage(res.data.message || 'Login successful');
 
       const user = res.data.user || { email: form.email };

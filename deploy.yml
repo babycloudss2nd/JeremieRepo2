@@ -19,7 +19,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          VITE_SERVER_IP: ${{ secrets.VITE_SERVER_IP }}  # <-- pass the secret to the build
+          VITE_SERVER_IP: ${{ secrets.VITE_SERVER_IP }}  
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master

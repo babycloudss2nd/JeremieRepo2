@@ -14,8 +14,8 @@ function Products({ cart, setCart }) {
         setLoading(true);
         setError(null);
 
-      const API_BASE_URL = process.env.VITE_SERVER_IP || 'localhost';
-      const res = await axios.post(`http://${API_BASE_URL}:5000/api/products`, form);
+      const API_BASE_URL = process.env.VITE_SERVER_IP || "http://54.174.227.60:5000";
+      const res = await axios.post(`${API_BASE_URL}/api/products`, form);
         if (!res.status === 200) throw new Error(`HTTP error! status: ${res.status}`);
         let data = res.data;
         if (!Array.isArray(data)) data = [];
