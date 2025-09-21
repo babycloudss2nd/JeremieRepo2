@@ -71,7 +71,7 @@ function Products({ cart, setCart }) {
 
           {error && (
             <div className="error-message">
-              <p>⚠️ Backend connection failed: {error}</p>
+              <p> Backend connection failed: {error}</p>
             </div>
           )}
 
