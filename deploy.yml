@@ -18,14 +18,16 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          VITE_SERVER_IP: ${{ secrets.VITE_SERVER_IP }}  # <-- pass the secret to the build
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --delete
         env:
-          AWS_S3_BUCKET: www.blackshield.com   # replace with your bucket name
+          AWS_S3_BUCKET: www.blackshield.com
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1                # replace with your region
-          SOURCE_DIR: "dist"                   # Vite/React build output
+          AWS_REGION: us-east-1
+          SOURCE_DIR: "dist"

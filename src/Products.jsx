@@ -14,9 +14,10 @@ function Products({ cart, setCart }) {
         setLoading(true);
         setError(null);
 
-        const response = await fetch("http://:5000/api/products");
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        let data = await response.json();
+      const API_BASE_URL = process.env.VITE_SERVER_IP || 'localhost';
+      const res = await axios.post(`http://${API_BASE_URL}:5000/api/products`, form);
+        if (!res.status === 200) throw new Error(`HTTP error! status: ${res.status}`);
+        let data = res.data;
         if (!Array.isArray(data)) data = [];
         setProducts(data);
       } catch (err) {
