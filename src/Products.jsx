@@ -14,7 +14,7 @@ function Products({ cart, setCart }) {
         setLoading(true);
         setError(null);
 
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch("http://:5000/api/products");
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         let data = await response.json();
         if (!Array.isArray(data)) data = [];

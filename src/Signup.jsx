@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './signup.css'
-import camsImage from './assets/pic.jpg'; 
+import camsImage from './assets/pic.jpg';
 
 function Signup({ onSuccess }) {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -17,7 +17,8 @@ function Signup({ onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/signup', form);
+      const API_BASE_URL = process.env.VITE_SERVER_IP || 'localhost';
+      const res = await axios.post(`http://${API_BASE_URL}:5000/api/signup`, form);
       setMessage(res.data.message);
       if (onSuccess) onSuccess();
       navigate('/login');
@@ -29,7 +30,7 @@ function Signup({ onSuccess }) {
   const backgroundStyle = {
     width: '100vw',
     height: '100vh',
-    backgroundImage: `url(${camsImage})`, 
+    backgroundImage: `url(${camsImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
