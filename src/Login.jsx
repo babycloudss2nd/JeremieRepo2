@@ -20,7 +20,6 @@ function Login({ onSuccess }) {
       const res = await axios.post('http://localhost:5000/api/login', form);
       setMessage(res.data.message || 'Login successful');
 
-      // ✅ Save user info (you may get res.data.user from backend)
       const user = res.data.user || { email: form.email };
       localStorage.setItem("user", JSON.stringify(user));
 
