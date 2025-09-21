@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Signup from './Signup.jsx';
+import Signup from './Signup.js';
 import Login from './Login.jsx';
 import Home from './Home.jsx';
 import Products from './Products.jsx';
