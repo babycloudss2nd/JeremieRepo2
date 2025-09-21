@@ -43,7 +43,7 @@ function Signup({ onSuccess }) {
       <div className="page-wrapper">
         <div className="signup-container">
           <div className="icon-top">
-            Be part of the <strong>Black Shield</strong> family
+            Be part of the <strong>Black Shield</strong> family today!
           </div>
 
           <div className="signup-image">
