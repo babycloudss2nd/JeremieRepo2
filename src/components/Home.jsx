@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import BACK1 from '../../public/BACK1.jpg';
 import BACK2 from '../../public/BACK2.jpg';
-import BACK3 from '../../public/BACK3.jpg';
+import BACK3 from '../../public/BACK3.webp';
 import BACK4 from '../../public/BACK4.jpg';
 
 function Home() {
