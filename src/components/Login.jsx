@@ -3,7 +3,6 @@ import axios from 'axios';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
-import loginBack from '../assets/loginBack.jpg';
 
 function Login({ onSuccess }) {
   const [form, setForm] = useState({ email: '', password: '' });
