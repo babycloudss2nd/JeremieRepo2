@@ -30,18 +30,6 @@ function Login({ onSuccess }) {
     }
   };
 
-  const backgroundStyle = {
-    backgroundImage: `url(${loginBack})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    width: '100vw',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
   return (
     <div style={backgroundStyle}>
       <div className="page-wrapper">
