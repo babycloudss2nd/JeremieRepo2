@@ -17,7 +17,7 @@ function Login({ onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/login', form);
+      const res = await axios.post('http://54.174.227.60/api/login', form);
       setMessage(res.data.message || 'Login successful');
 
       const user = res.data.user || { email: form.email };
