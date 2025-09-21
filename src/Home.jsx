@@ -21,7 +21,6 @@ function Home() {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  // Welcome message for logged-in user
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) setUserName(storedUser.name || storedUser.email);
