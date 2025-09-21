@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Products.css";
-import fallbackImg from './assets/no-image.png';
+import fallbackImg from '../..public/fallback.png';
 
 function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);

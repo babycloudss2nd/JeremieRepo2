@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import BACK1 from '../../public/BACK1.jpg';
+import BACK2 from '../../public/BACK2.jpg';
+import BACK3 from '../../public/BACK3.jpg';
+import BACK4 from '../../public/BACK4.jpg';
 
 function Home() {
   const slides = [
-    { img: "/BACK1.jpg", text: "Unbeatable deals you won't find anywhere else." },
-    { img: "/BACK2.jpg", text: "Top-quality products at prices made for you." },
-    { img: "/BACK3.webp", text: "Secure, reliable, and trusted service every time." },
-    { img: "/BACK4.jpg", text: "Everything you need—delivered with value and care." },
+    { img: BACK1, text: "Unbeatable deals you won't find anywhere else." },
+    { img: BACK2, text: "Top-quality products at prices made for you." },
+    { img: BACK3, text: "Secure, reliable, and trusted service every time." },
+    { img: BACK4, text: "Everything you need—delivered with value and care." },
   ];
 
   const [current, setCurrent] = useState(0);
