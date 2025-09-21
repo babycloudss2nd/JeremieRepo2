@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import './Signup.css'
+import './signup.css'
 import camsImage from './assets/pic.jpg'; 
 
 function Signup({ onSuccess }) {

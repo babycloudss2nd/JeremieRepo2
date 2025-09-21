@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import './Signup.css';
+import './signup.css';
 import loginBack from './assets/loginback.jpg';
 
 function Login({ onSuccess }) {
