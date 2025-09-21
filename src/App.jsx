@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Signup from './signup.jsx';
+import signup from './signup.jsx';
 import Login from './Login.jsx';
 import Home from './Home.jsx';
 import Products from './Products.jsx';
@@ -92,7 +92,7 @@ function App() {
           <Route
             path="/"
             element={
-              <Signup
+              <signup
                 onSuccess={(u) => {
                   setIsAuthenticated(true);
                   setUser(u);
