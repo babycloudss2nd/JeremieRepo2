@@ -9,7 +9,7 @@ const API_BASE_URL =
   import.meta.env.VITE_API_URL || "http://54.174.227.60:5000";
 const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
 
-function signup({ onSuccess }) {
+function Signup({ onSuccess }) {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -107,4 +107,4 @@ function signup({ onSuccess }) {
   );
 }
 
-export default signup;
+export default Signup;
