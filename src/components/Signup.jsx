@@ -6,7 +6,7 @@ import './signup.css';
 import camsImage from '../assets/cams.webp';
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "https://54.174.227.60:5000";
+  import.meta.env.VITE_API_URL || "http://54.174.227.60:5000";
 
 function Signup({ onSuccess }) {
   const [form, setForm] = useState({ name: '', email: '', password: '' });

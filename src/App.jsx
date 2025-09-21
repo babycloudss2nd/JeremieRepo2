@@ -46,6 +46,11 @@ function Layout({ children, isAuthenticated }) {
 }
 
 function App() {
+  const fullUrl = new URL(window.location);
+const ip = fullUrl.searchParams.get('ip') || localStorage.getItem("ip");
+localStorage.setItem("ip",ip);
+const url = `http://${ip}:5000`;
+window.history.pushState({}, '', fullUrl)
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return localStorage.getItem('isAuthenticated') === 'true';
   });
