@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
-
+import BACK1 from '../../public/BACK1.jpg';
 function Login({ onSuccess }) {
   const [form, setForm] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
