@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
-import camsImage from '../assets/cams.jpg';
+import camsImage from '../assets/cams.webp';
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL || "https://54.174.227.60:5000";
