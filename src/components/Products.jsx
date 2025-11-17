@@ -17,7 +17,7 @@ function Products({ cart, setCart }) {
         setError(null);
 
         const API_BASE_URL =
-          import.meta.env.VITE_API_URL || "http://3.90.159.31:5000";
+          import.meta.env.VITE_SERVER_IP || "http://3.90.159.31:5000";
         const res = await axios.get(`${API_BASE_URL}/api/products`); // changed to GET
         if (res.status !== 200) throw new Error(`HTTP error! status: ${res.status}`);
         let data = res.data;

@@ -6,7 +6,7 @@ import './signup.css';
 import camsImage from '../assets/wall.jpg';
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://3.90.159.31:5000";
+  import.meta.env.VITE_SERVER_IP || "http://3.90.159.31:5000";
 
 function Signup({ onSuccess, navigateProp }) {
   const navigate = navigateProp || useNavigate(); // Use spy or fallback
