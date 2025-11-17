@@ -35,7 +35,7 @@ function Home() {
 
     return () => clearTimeout(timer);
   }, []);
-
+ 
   return (
     <div className="home-wrapper">
       <div
