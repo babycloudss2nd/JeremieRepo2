@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./Products.css";
+
+const fallbackImg = "https://via.placeholder.com/150x150?text=No+Image";
 
 function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
@@ -13,9 +16,10 @@ function Products({ cart, setCart }) {
         setLoading(true);
         setError(null);
 
-      const API_BASE_URL = process.env.VITE_SERVER_IP || "http://54.174.227.60:5000";
-      const res = await axios.post(`${API_BASE_URL}/api/products`, form);
-        if (!res.status === 200) throw new Error(`HTTP error! status: ${res.status}`);
+        const API_BASE_URL =
+          import.meta.env.VITE_API_URL || "http://3.90.159.31:5000";
+        const res = await axios.get(`${API_BASE_URL}/api/products`); // changed to GET
+        if (res.status !== 200) throw new Error(`HTTP error! status: ${res.status}`);
         let data = res.data;
         if (!Array.isArray(data)) data = [];
         setProducts(data);
@@ -71,7 +75,7 @@ function Products({ cart, setCart }) {
 
           {error && (
             <div className="error-message">
-              <p> Backend connection failed: {error}</p>
+              <p>Backend connection failed: {error}</p>
             </div>
           )}
 
@@ -99,14 +103,19 @@ function Products({ cart, setCart }) {
                         src={item.image || fallbackImg}
                         alt={item.name || "Product"}
                         className="product-image"
-                        onError={(e) => { e.target.onerror = null; e.target.src = fallbackImg; }}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = fallbackImg;
+                        }}
                       />
                       <h3 className="product-name">{item.name || "Unnamed Product"}</h3>
                       <p className="product-desc">
-                        {item.description || "This is a high-quality product that you'll love!"}
+                        {item.description ||
+                          "This is a high-quality product that you'll love!"}
                       </p>
                       <p className="product-benefit">
-                        {item.benefit || "Experience the best performance and quality with this product."}
+                        {item.benefit ||
+                          "Experience the best performance and quality with this product."}
                       </p>
                       <p className="product-price">R{item.price || 0}</p>
                       <button

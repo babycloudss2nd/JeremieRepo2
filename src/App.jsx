@@ -10,7 +10,7 @@ import Checkout from './components/Checkout.jsx';
 import Delivery from './components/Delivery.jsx';
 import Navigation from './components/Navigation.jsx';
 
-function ProtectedRouteWrapper({ isAuth, children }) {
+function ProtectedRoute({ isAuth, children }) {
   if (!isAuth) {
     return (
       <div style={{ padding: 50, textAlign: 'center' }}>
@@ -33,10 +33,9 @@ function NotFound() {
   );
 }
 
-function Layout({ children, isAuthenticated }) {
+function Layout({ children }) {
   const location = useLocation();
   const hideNav = location.pathname === '/' || location.pathname === '/login';
-
   return (
     <>
       {!hideNav && <Navigation />}
@@ -46,56 +45,61 @@ function Layout({ children, isAuthenticated }) {
 }
 
 function App() {
-  const fullUrl = new URL(window.location);
-const ip = fullUrl.searchParams.get('ip') || localStorage.getItem("ip");
-localStorage.setItem("ip",ip);
-const url = `http://${ip}:5000`;
-window.history.pushState({}, '', fullUrl)
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('isAuthenticated') === 'true';
-  });
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const ip = urlParams.get('ip') || localStorage.getItem('ip') || '';
+    if (ip) localStorage.setItem('ip', ip);
+  }, []);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem('isAuthenticated') === 'true'
+  );
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem('user');
-    if (!savedUser || savedUser === 'undefined') return null;
     try {
-      return JSON.parse(savedUser);
-    } catch (err) {
-      console.error('Failed to parse user from localStorage', err);
+      const saved = localStorage.getItem('user');
+      return saved && saved !== 'undefined' ? JSON.parse(saved) : null;
+    } catch {
       return null;
     }
   });
 
+  // Cart & orders state
   const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (!savedCart || savedCart === 'undefined') return [];
     try {
-      return JSON.parse(savedCart);
-    } catch (err) {
-      console.error('Failed to parse cart from localStorage', err);
+      const saved = localStorage.getItem('cart');
+      return saved && saved !== 'undefined' ? JSON.parse(saved) : [];
+    } catch {
       return [];
     }
   });
-
   const [appointments, setAppointments] = useState([]);
   const [orders, setOrders] = useState([]);
 
+  // Persist state
   useEffect(() => {
     localStorage.setItem('isAuthenticated', isAuthenticated);
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('user');
-    }
+    if (user) localStorage.setItem('user', JSON.stringify(user));
+    else localStorage.removeItem('user');
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [isAuthenticated, user, cart]);
 
   return (
     <Router>
-      <Layout isAuthenticated={isAuthenticated}>
+      <Layout>
         <Routes>
           <Route
             path="/"
+            element={
+              <Signup
+                onSuccess={(u) => {
+                  setIsAuthenticated(true);
+                  setUser(u);
+                }}
+              />
+            }
+          />
+          <Route
+            path="/signup"
             element={
               <Signup
                 onSuccess={(u) => {
@@ -119,42 +123,42 @@ window.history.pushState({}, '', fullUrl)
           <Route
             path="/home"
             element={
-              <ProtectedRouteWrapper isAuth={isAuthenticated}>
+              <ProtectedRoute isAuth={isAuthenticated}>
                 <Home cart={cart} appointments={appointments} user={user} />
-              </ProtectedRouteWrapper>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/products"
             element={
-              <ProtectedRouteWrapper isAuth={isAuthenticated}>
+              <ProtectedRoute isAuth={isAuthenticated}>
                 <Products cart={cart} setCart={setCart} />
-              </ProtectedRouteWrapper>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/booking"
             element={
-              <ProtectedRouteWrapper isAuth={isAuthenticated}>
+              <ProtectedRoute isAuth={isAuthenticated}>
                 <BookingAppointments
                   appointments={appointments}
                   setAppointments={setAppointments}
                 />
-              </ProtectedRouteWrapper>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/cart"
             element={
-              <ProtectedRouteWrapper isAuth={isAuthenticated}>
+              <ProtectedRoute isAuth={isAuthenticated}>
                 <Cart cart={cart} setCart={setCart} />
-              </ProtectedRouteWrapper>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/checkout"
             element={
-              <ProtectedRouteWrapper isAuth={isAuthenticated}>
+              <ProtectedRoute isAuth={isAuthenticated}>
                 <Checkout
                   cart={cart}
                   setCart={setCart}
@@ -162,18 +166,17 @@ window.history.pushState({}, '', fullUrl)
                   orders={orders}
                   setOrders={setOrders}
                 />
-              </ProtectedRouteWrapper>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/delivery"
             element={
-              <ProtectedRouteWrapper isAuth={isAuthenticated}>
+              <ProtectedRoute isAuth={isAuthenticated}>
                 <Delivery orders={orders} />
-              </ProtectedRouteWrapper>
+              </ProtectedRoute>
             }
           />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

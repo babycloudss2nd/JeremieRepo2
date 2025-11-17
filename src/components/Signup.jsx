@@ -3,15 +3,16 @@ import axios from 'axios';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
-import camsImage from '../assets/cams.webp';
+import camsImage from '../assets/wall.jpg';
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://54.174.227.60:5000";
+  import.meta.env.VITE_API_URL || "http://3.90.159.31:5000";
 
-function Signup({ onSuccess }) {
+function Signup({ onSuccess, navigateProp }) {
+  const navigate = navigateProp || useNavigate(); // Use spy or fallback
+
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,9 +22,9 @@ function Signup({ onSuccess }) {
     e.preventDefault();
     try {
       const res = await axios.post(`${API_BASE_URL}/api/signup`, form);
-      setMessage(res.data.message);
+      setMessage(res.data.message || 'Signup successful');
       if (onSuccess) onSuccess();
-      navigate('/login');
+      navigate('/login'); // Works with navigateProp for Cypress
     } catch (err) {
       setMessage(
         'Signup failed, try again: ' +
@@ -97,7 +98,10 @@ function Signup({ onSuccess }) {
             {message && <p className="message">{message}</p>}
           </form>
 
-          <button className="login-redirect" onClick={() => navigate('/login')}>
+          <button
+            className="login-redirect"
+            onClick={() => navigate('/login')}
+          >
             Already have an account? Log in
           </button>
         </div>

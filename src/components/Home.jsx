@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import BACK1 from '../../public/BACK1.jpg';
-import BACK2 from '../../public/BACK2.jpg';
-import BACK3 from '../../public/BACK3.webp';
-import BACK4 from '../../public/BACK4.jpg';
+import BACK1 from '../../public/soldi.jpg';
+import BACK2 from '../../public/first.jpg';
+import BACK3 from '../../public/safe.jpeg';
+import BACK4 from '../../public/ww.jpg';
 
 function Home() {
   const slides = [
@@ -31,7 +31,7 @@ function Home() {
 
     const timer = setTimeout(() => {
       setShowWelcome(false);
-    }, 5000);
+    }, 100000);
 
     return () => clearTimeout(timer);
   }, []);

@@ -1,3 +1,4 @@
+// Cart.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
@@ -45,7 +46,7 @@ function Cart({ cart, setCart, appointments = [] }) {
           <p>Your cart is empty.</p>
           <button
             className="continue-shopping-btn"
-            onClick={() => navigate('/products')}
+            onClick={() => navigate("/products")}
           >
             Continue Shopping
           </button>
@@ -57,10 +58,13 @@ function Cart({ cart, setCart, appointments = [] }) {
               <div key={item.id || item._id} className="cart-item-wrapper">
                 <div className="cart-row">
                   <img
-                    src={item.image || "https://via.placeholder.com/80x80?text=No+Image"}
+                    src={item.image || "/BACK1.jpg"} // fallback to BACK1.jpg
                     alt={item.name || "Product"}
                     className="cart-item-img"
-                    onError={(e) => { e.target.src = "https://via.placeholder.com/80x80?text=No+Image"; }}
+                    onError={(e) => {
+                      e.target.onerror = null; // prevent infinite loop
+                      e.target.src = "/BACK1.jpg"; // fallback image
+                    }}
                   />
                   <div className="cart-item-details">
                     <p className="item-name">{item.name || "Unnamed Product"}</p>
@@ -92,28 +96,28 @@ function Cart({ cart, setCart, appointments = [] }) {
 
           <div className="cart-summary">
             <div className="cart-total">
-              <span>Subtotal:</span>
+              <span>Subtotal: </span>
               <span>R{subtotal.toFixed(2)}</span>
             </div>
             <div className="cart-total">
-              <span>Shipping:</span>
-              <span>R{subtotal > 500 ? '0.00' : '50.00'}</span>
+              <span>Shipping: </span>
+              <span>R{subtotal > 500 ? "0.00" : "50.00"}</span>
             </div>
             <div className="cart-total total-row">
-              <span>Total:</span>
+              <span>Total: </span>
               <span>R{(subtotal + (subtotal > 500 ? 0 : 50)).toFixed(2)}</span>
             </div>
 
             <div className="cart-actions">
               <button
                 className="continue-shopping-btn"
-                onClick={() => navigate('/products')}
+                onClick={() => navigate("/products")}
               >
                 Continue Shopping
               </button>
               <button
                 className="checkout-btn"
-                onClick={() => navigate('/checkout')}
+                onClick={() => navigate("/checkout")}
               >
                 Proceed to Checkout
               </button>
